@@ -7,51 +7,68 @@ def read_file(filename):
     return lines
 
 
-def parse_packet(data, cursor, values):
-    new_cursor = cursor
-    value = ""
-    version = int(data[cursor : cursor + 3], 2)
-    type_id = int(data[cursor + 3 : cursor + 6], 2)
-    cursor += 6
-    if type_id == 4:  # literal value
-        keep_going = True
-        while keep_going:
-            if data[cursor] == "0":  # last packet read and stop going
-                keep_going = False
-            value += data[cursor + 1 : cursor + 5]  # get the value
-            cursor += 5
-        cursor += 3
-        print("value", value, int(value, 2))
-        values.append(int(value, 2))
-        # sys.exit()
-    else:  # operator
-        if data[cursor] == "0":
-            cursor += 1
-            # next 15 bits represent total length in bits
-            length = int(data[cursor : cursor + 15], 2)
-            print("length", length)
-            cursor += 15
-            value, cursor = parse_packet(data, cursor, values)
-            print("value", value, int(value, 2))
+def parse_packet(data, old_cursor, values, versions):
+    while old_cursor < len(data):
+        new_cursor = old_cursor
+        value = ""
+        version = int(data[new_cursor: new_cursor + 3], 2)
+        print('cursor', new_cursor, 'version', version)
+        versions.append(version)
+        new_cursor += 3
+        type_id = int(data[new_cursor: new_cursor+3], 2)
+        print('cursor', new_cursor, 'type', type_id)
+        new_cursor += 3
+        if type_id == 4:  # literal value
+            keep_going = True
+            round = 0
+            while keep_going:
+                if data[new_cursor] == "0":  # last packet read and stop going
+                    keep_going = False
+                value += data[new_cursor + 1: new_cursor + 5]  # get the value
+                new_cursor += 5
+                round += 1
+            print("cursor", new_cursor, "value", int(value, 2))
+            values.append(int(value, 2))
+        else:  # operator
+            print("cursor", new_cursor, "length type", data[new_cursor])
+            if data[new_cursor] == "0":
 
-        else:
-            # next 11 bits represent number of sub-packets contained
-            num_subpackets = int(data[cursor : cursor + 11], 2)
-            print("num pack", num_subpackets)
-            cursor += 11
-            # value, cursor = parse_literal(data, cursor)
-            # print("value2", value)
+                new_cursor += 1
+                # next 15 bits represent total length in bits
+                length = int(data[new_cursor: new_cursor + 15], 2)
+                new_cursor += 15
+                print("cursor", new_cursor, "length", length)
+                end = new_cursor + length
+                print("cursor before sub packet", new_cursor)
+                while new_cursor < end:
+                    print('cursor', new_cursor)
+                    value, return_cursor = parse_packet(
+                        data, new_cursor, values, versions)
+                    new_cursor = return_cursor
+                    print("value", value, int(value, 2))
 
-    return value, new_cursor, version
+            else:
+                # next 11 bits represent number of sub-packets contained
+                new_cursor += 1
+                num_subpackets = int(data[new_cursor: new_cursor + 11], 2)
+                print('cursor', new_cursor, "num pack", num_subpackets)
+                new_cursor += 11
+                for _ in range(num_subpackets):
+                    value, return_cursor = parse_packet(
+                        data, new_cursor, values, versions)
+                    new_cursor = return_cursor
+        return value, new_cursor
 
 
 def p1(data):
-    print(data)
+    print(data, len(data))
     versions = []
     values = []
     cursor = 0
-    while cursor < len(data):
-        value, cursor, version = parse_packet(data, cursor, values)
+    parse_packet(data, cursor, values, versions)
+    print('versions', versions)
+    print("vsum", sum(versions))
+    print('values', values)
 
 
 def hex2bin(value):
@@ -61,8 +78,8 @@ def hex2bin(value):
 
 
 def main():
-    # data = read_file("input.txt")
-    data = read_file("ex.txt")
+    data = read_file("input.txt")
+    #data = read_file("ex.txt")
     p1(hex2bin(data))
 
 
