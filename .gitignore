@@ -106,3 +106,8 @@ venv.bak/
 # pycharm
 .idea/
 .vscode/
+
+
+# Added by cargo
+
+/target
