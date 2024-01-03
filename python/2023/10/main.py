@@ -15,19 +15,24 @@ def example_input():
         return f.readlines()
 
 
-def test_main(example_input):
+@pytest.fixture
+def example_input2():
+    with open("./example_input2") as f:
+        return f.readlines()
+
+
+def test_main(example_input, example_input2):
     assert p1(example_input) == 8
-    # assert p2(example_input) ==
+    assert p2(example_input2) == 10
 
 
-def p1(txt: list[str]) -> int:
+def get_boundary(txt) -> set[tuple[int, int]]:
     """
     0: up
     1: down
     2: left
     3: right
     """
-    steps = 0
     for y1, line in enumerate(txt):
         S = line.find("S")
         if S >= 0:
@@ -48,9 +53,8 @@ def p1(txt: list[str]) -> int:
         move = 1
     else:
         raise ValueError("No connection found")
-
+    boundary = {(x, y)}
     while True:
-        steps += 1
         match move:
             case 0:
                 y -= 1
@@ -67,7 +71,7 @@ def p1(txt: list[str]) -> int:
         2: left
         3: right
         """
-
+        boundary.add((x, y))
         match txt[y][x]:
             # Change direction if we should turn
             case "L":
@@ -78,13 +82,25 @@ def p1(txt: list[str]) -> int:
                 move = 3 if move == 0 else 1
             case "7":
                 move = 2 if move == 0 else 1
-
         if x == x1 and y == y1:
             break
-    return ceil(steps / 2)
+    return boundary
+
+
+def p1(txt: list[str]) -> int:
+    return ceil(len(get_boundary(txt)) / 2)
 
 
 def p2(txt):
+    boundary = get_boundary(txt)
+    area = 0
+    for y,row in enumerate(txt):
+        wall_count = 0
+        for x,char in enumerate(row):
+            if (x,y) in boundary:
+                
+            
+        
     return
 
 
