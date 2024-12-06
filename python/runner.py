@@ -27,5 +27,6 @@ if __name__ == "__main__":
         day=day,
     )
     answers = mod.solver(myinput)
+    # print(f"Input: {myinput}")
     print(f"Part1: {answers[0]}")
     print(f"Part2: {answers[1]}")
