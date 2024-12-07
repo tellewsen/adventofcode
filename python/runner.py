@@ -12,6 +12,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("year", type=int)
     parser.add_argument("day", type=int)
+    parser.add_argument("-p", action="store_true")
     args = parser.parse_args()
     year = str(args.year)
     day = str(args.day)
@@ -27,6 +28,7 @@ if __name__ == "__main__":
         day=day,
     )
     answers = mod.solver(myinput)
-    # print(f"Input: {myinput}")
+    if args.p:
+        print(f"Input: {myinput}")
     print(f"Part1: {answers[0]}")
     print(f"Part2: {answers[1]}")
