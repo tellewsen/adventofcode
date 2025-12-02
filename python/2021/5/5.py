@@ -50,5 +50,5 @@ def main():
     print(2, p2(content))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -39,7 +39,7 @@ def get_missing_chars(line):
             waiting_for.append(char)
         else:  # closing_char
             waiting_for.pop()
-    return ''.join([OPEN2CLOSE[i] for i in reversed(waiting_for)])
+    return "".join([OPEN2CLOSE[i] for i in reversed(waiting_for)])
 
 
 def calculate_score(chars):
@@ -55,7 +55,7 @@ def p2(content):
     incomplete = [i for i in content if not get_first_illegal_char(i)]
     missing_chars = [get_missing_chars(i) for i in incomplete]
     scores = [calculate_score(i) for i in missing_chars]
-    mid = math.floor(len(scores)/2)
+    mid = math.floor(len(scores) / 2)
     return sorted(scores)[mid]
 
 

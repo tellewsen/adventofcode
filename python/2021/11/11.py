@@ -17,8 +17,8 @@ def get_neighbours(hm, x, y):
     max_y = len(hm[0]) - 1
     for i in [-1, 0, 1]:
         for j in [-1, 0, 1]:
-            if 0 <= x+i <= max_x and 0 <= y+j <= max_y:
-                neighbours.append((x+i, y+j))
+            if 0 <= x + i <= max_x and 0 <= y + j <= max_y:
+                neighbours.append((x + i, y + j))
     return neighbours
 
 
@@ -58,7 +58,7 @@ def p2(grid):
     for x in range(1000):
         evolve(grid)
         if np.count_nonzero(grid) == 0:
-            return x+1
+            return x + 1
 
 
 def main():

@@ -2,9 +2,8 @@ import numpy as np
 
 
 def read_file(filename):
-    with open(filename, 'r') as f:
-        file_input = [i.rstrip().lstrip().replace('  ', ' ')
-                      for i in f.readlines()]
+    with open(filename, "r") as f:
+        file_input = [i.rstrip().lstrip().replace("  ", " ") for i in f.readlines()]
     return file_input
 
 
@@ -13,8 +12,8 @@ def fill_boards(file_content):
     marks = []
     for i in range(2, len(file_content), 6):
         grid = np.zeros((5, 5), dtype=int)
-        for i, line in enumerate(file_content[i:i+5]):
-            numbers = line.split(' ')
+        for i, line in enumerate(file_content[i : i + 5]):
+            numbers = line.split(" ")
             for j in range(len(numbers)):
                 grid[i][j] = int(numbers[j])
         boards.append(grid)
@@ -48,7 +47,7 @@ def p1(boards, marks, numbers):
                 marks[i][location] = 1
             if has_won(marks[i]):
                 win_marks = marks[i]
-                return get_score(board, win_marks)*num
+                return get_score(board, win_marks) * num
     raise Exception
 
 
@@ -65,17 +64,17 @@ def p2(boards, marks, numbers):
             if has_won(marks[i]):
                 has_won.add(i)
                 if len(has_won) == board_len:
-                    return get_score(board, marks[i])*num
+                    return get_score(board, marks[i]) * num
     raise Exception
 
 
 def main():
-    file_content = read_file('input.txt')
-    bingo_numbers = [int(i) for i in file_content[0].split(',')]
+    file_content = read_file("input.txt")
+    bingo_numbers = [int(i) for i in file_content[0].split(",")]
     boards, marks = fill_boards(file_content)
     print(1, p1(boards.copy(), marks.copy(), bingo_numbers.copy()))
     print(2, p2(boards.copy(), marks.copy(), bingo_numbers.copy()))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

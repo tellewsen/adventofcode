@@ -1,12 +1,12 @@
 import math
 
-with open('input', 'r') as f:
+with open("input", "r") as f:
     data = f.readlines()
 
 
 # Part 1
 def rocket_equation_simple(mass):
-    return math.floor(mass/3) - 2
+    return math.floor(mass / 3) - 2
 
 
 print("#1: ", sum(rocket_equation_simple(int(i)) for i in data))

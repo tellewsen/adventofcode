@@ -8,7 +8,7 @@ How have I never heard of this before..
 
 import networkx as nx
 
-data = [line.strip().split(")") for line in open('input', 'r').readlines()]
+data = [line.strip().split(")") for line in open("input", "r").readlines()]
 g = nx.Graph(data)
 part1 = sum(nx.shortest_path_length(g, x, "COM") for x in g.nodes)
 part2 = nx.shortest_path_length(g, "YOU", "SAN") - 2

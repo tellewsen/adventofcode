@@ -15,26 +15,29 @@ def p1():
             if box.count(l) == 3:
                 threes = True
         if twos:
-            two +=1
+            two += 1
         if threes:
             three += 1
-    print("p1: ", two*three)
+    print("p1: ", two * three)
+
 
 def p2():
     puzsort = sorted(puzzle)
     line_len = len(puzsort[0])
-    different = 0    
+    different = 0
     for line_i in range(1, len(puzsort)):
         for char_i in range(line_len):
-            if puzsort[line_i][char_i] != puzsort[line_i -1][char_i]:
-                different +=1
+            if puzsort[line_i][char_i] != puzsort[line_i - 1][char_i]:
+                different += 1
         if different == 1:
-            solution = ''
+            solution = ""
             for char_i in range(line_len):
-                if puzsort[line_i][char_i] == puzsort[line_i -1][char_i]:
+                if puzsort[line_i][char_i] == puzsort[line_i - 1][char_i]:
                     solution += puzsort[line_i][char_i]
             print("p2: ", solution)
             break
         different = 0
+
+
 p1()
 p2()

@@ -25,9 +25,17 @@ class Amplifier(object):
             # Set the parameter mode
             mode = parse_mode(opcode)
 
-            a = self.prog[self.index + 1] if mode[0] else self.prog[self.prog[self.index + 1]]
+            a = (
+                self.prog[self.index + 1]
+                if mode[0]
+                else self.prog[self.prog[self.index + 1]]
+            )
             try:
-                b = self.prog[self.index + 2] if mode[1] else self.prog[self.prog[self.index + 2]]
+                b = (
+                    self.prog[self.index + 2]
+                    if mode[1]
+                    else self.prog[self.prog[self.index + 2]]
+                )
             except Exception:
                 pass
             if str(opcode)[-1] == "1":
@@ -58,15 +66,17 @@ class Amplifier(object):
                 self.index += 4
             else:
                 raise Exception(
-                    "Weird value at pos {}: {} ".format(self.index, self.prog[self.index]))
+                    "Weird value at pos {}: {} ".format(
+                        self.index, self.prog[self.index]
+                    )
+                )
 
             # if self.index > len(self.prog):
             #     self.index -= len(self.prog)
 
 
 def main():
-    amplifier_program = [int(i) for i in
-                         open('input').read().strip().split(',')]
+    amplifier_program = [int(i) for i in open("input").read().strip().split(",")]
 
     phase = [0, 1, 2, 3, 4]
     phases = list(itertools.permutations(phase))
@@ -101,5 +111,5 @@ def main():
     print("Part #2:", best)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

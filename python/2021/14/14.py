@@ -14,7 +14,7 @@ def read_file(filename):
 def go_once(char_map, line):
     new_line = line[0]
     for i in range(1, len(line)):
-        chars = line[i-1]+line[i]
+        chars = line[i - 1] + line[i]
         if chars in char_map:
             new_line += char_map[chars] + line[i]
         else:
@@ -26,15 +26,14 @@ def p1(char_map, line):
     # bruto force lol
     new_line = line
     for i in range(10):
-        print('gone ', i, ' steps')
+        print("gone ", i, " steps")
         new_line = go_once(char_map, new_line)
     counts = {}
-    for c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ':
+    for c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
         count = new_line.count(c)
         if count:
             counts[c] = count
-    print(counts[max(counts, key=counts.get)] -
-          counts[min(counts, key=counts.get)])
+    print(counts[max(counts, key=counts.get)] - counts[min(counts, key=counts.get)])
 
 
 def p2(char_map, line):
@@ -42,7 +41,7 @@ def p2(char_map, line):
     # initialize
     counts = {k: 0 for k in char_map}
     for i in range(1, len(line)):
-        chars = line[i-1]+line[i]
+        chars = line[i - 1] + line[i]
         if chars in char_map:
             counts[chars] += 1
         else:
@@ -54,7 +53,7 @@ def p2(char_map, line):
                 continue
             extra_char = char_map[k]
             counts[k] -= v  # we lose the current pair
-            counts[k[0]+extra_char] += v  # the new left pair
+            counts[k[0] + extra_char] += v  # the new left pair
             counts[extra_char + k[1]] += v  # the new right pair
     # Count characters
     char_counts = {}
@@ -68,9 +67,11 @@ def p2(char_map, line):
         else:
             char_counts[k[1]] = v
     # round after division to account for edgecharacters
-    char_counts = {k: round(v/2) for k, v in char_counts.items()}
-    print(char_counts[max(char_counts, key=char_counts.get)] -
-          char_counts[min(char_counts, key=char_counts.get)])
+    char_counts = {k: round(v / 2) for k, v in char_counts.items()}
+    print(
+        char_counts[max(char_counts, key=char_counts.get)]
+        - char_counts[min(char_counts, key=char_counts.get)]
+    )
 
 
 def main():
@@ -80,7 +81,7 @@ def main():
     ]
     for name in filenames:
         char_map, line = read_file(name)
-        #p1(char_map, line)
+        # p1(char_map, line)
         p2(char_map, line)
 
 
