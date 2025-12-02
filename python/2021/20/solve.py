@@ -14,30 +14,30 @@ def read_file(fname):
                 algo = line.rstrip()
                 continue
             for j, data in enumerate(line.rstrip()):
-                image[(i-2, j)] = data
+                image[(i - 2, j)] = data
         return algo, image
 
 
 def pad(image, step):
-    pad_char = '.' if step % 2 == 0 else '#'
+    pad_char = "." if step % 2 == 0 else "#"
     min_x, min_y = min(k for k in image)
     max_x, max_y = max(k for k in image)
     padded = image.copy()
     # sides
-    for y in range(min_y, max_y+1):
-        padded[(min_x-1, y)] = pad_char
-        padded[(max_x+1, y)] = pad_char
+    for y in range(min_y, max_y + 1):
+        padded[(min_x - 1, y)] = pad_char
+        padded[(max_x + 1, y)] = pad_char
     # top bottom
-    for x in range(min_x-1, max_x+2):
-        padded[x, min_y-1] = pad_char
-        padded[x, max_y+1] = pad_char
+    for x in range(min_x - 1, max_x + 2):
+        padded[x, min_y - 1] = pad_char
+        padded[x, max_y + 1] = pad_char
     return padded
 
 
 def get_new_pixel(padded_image, point, algo):
-    total = ''
+    total = ""
     for i in get_neighbours(point):
-        total += '1' if padded_image[i] == '#' else '0'
+        total += "1" if padded_image[i] == "#" else "0"
     return algo[int(total, 2)]
 
 
@@ -57,18 +57,18 @@ def solve(algo, image, step):
 def get_neighbours(point):
     x, y = point
     neigs = []
-    for i in [x-1, x, x+1]:
-        for j in [y-1, y, y+1]:
+    for i in [x - 1, x, x + 1]:
+        for j in [y - 1, y, y + 1]:
             neigs.append((i, j))
     return neigs
 
 
 def count_lights(image):
-    return sum([1 for v in image.values() if v == '#'])
+    return sum([1 for v in image.values() if v == "#"])
 
 
 def main():
-    algo, image = read_file('input.txt')
+    algo, image = read_file("input.txt")
 
     for i in range(50):
         image = solve(algo, image, i)

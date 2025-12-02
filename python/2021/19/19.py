@@ -1,4 +1,3 @@
-
 def read_file(fname):
     with open(fname) as f:
         image = {}
@@ -7,5 +6,5 @@ def read_file(fname):
                 algo = line.rstrip()
                 continue
             for j, data in enumerate(line.rstrip()):
-                image[(i-2, j)] = data
+                image[(i - 2, j)] = data
         return algo, image

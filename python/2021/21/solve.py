@@ -32,7 +32,7 @@ def go_thrice(ploc, pscore, die, rolls, p2score):
     ploc = 10 if ploc == 0 else ploc
     pscore += ploc
     if check_won(pscore):
-        print(1, p2score*rolls)
+        print(1, p2score * rolls)
         sys.exit(0)
     return ploc, pscore, die, rolls, p2score
 
@@ -47,10 +47,12 @@ def main():
 
     while True:
         p1loc, p1score, die, rolls, p2score = go_thrice(
-            p1loc, p1score, die, rolls, p2score)
+            p1loc, p1score, die, rolls, p2score
+        )
 
         p2loc, p2score, die, rolls, p1score = go_thrice(
-            p2loc, p2score, die, rolls, p1score)
+            p2loc, p2score, die, rolls, p1score
+        )
 
 
 print(main())

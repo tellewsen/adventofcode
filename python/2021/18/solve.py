@@ -1,4 +1,3 @@
-
 def read_file(fname):
     with open(fname) as f:
         lines = []
@@ -7,8 +6,7 @@ def read_file(fname):
         return lines
 
 
-def magnitude(line):
-    ...
+def magnitude(line): ...
 
 
 def reduce(line):
@@ -25,5 +23,5 @@ def solve(lines):
     print(magnitude(lines[0]))
 
 
-solve(read_file('ex.txt'))
+solve(read_file("ex.txt"))
 # solve(read_file('input.txt'))

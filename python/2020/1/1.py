@@ -1,4 +1,4 @@
-with open('input') as f:
+with open("input") as f:
     numbers = f.read().splitlines()
 numbers = [int(i) for i in numbers]
 

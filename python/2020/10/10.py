@@ -1,4 +1,4 @@
-with open('input') as f:
+with open("input") as f:
     file = [int(i) for i in f.read().splitlines()]
 
 file.append(0)  # outlet
@@ -18,13 +18,13 @@ for i in range(len(file) - 1):
     elif diff == 3:
         three_jolt += 1
     else:
-        print('error')
+        print("error")
 
-print('p1: ', one_jolt * three_jolt)
+print("p1: ", one_jolt * three_jolt)
 
 # Part 2
 pc = {0: 1}
 for a in file[1:]:
     pc[a] = pc.get(a - 3, 0) + pc.get(a - 2, 0) + pc.get(a - 1, 0)
 
-print('p2: ', pc[file[-2]])
+print("p2: ", pc[file[-2]])

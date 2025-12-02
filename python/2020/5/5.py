@@ -1,6 +1,9 @@
-with open('input') as f:
+with open("input") as f:
     file = f.read().splitlines()
-file = [line.replace('F', '0').replace('B', '1').replace('R', '1').replace('L', '0') for line in file]
+file = [
+    line.replace("F", "0").replace("B", "1").replace("R", "1").replace("L", "0")
+    for line in file
+]
 
 foo = [(int(bar[:7], 2), int(bar[7:], 2)) for bar in file]
 seatids = [i[0] * 8 + i[1] for i in foo]

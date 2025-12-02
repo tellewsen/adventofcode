@@ -3,20 +3,10 @@ import collections
 import matplotlib.pyplot as plt
 import numpy as np
 
-num_locations = {1: 3,
-                 2: 3,
-                 3: 1,
-                 4: 1,
-                 5: 2,
-                 6: 2,
-                 7: 3,
-                 8: 3,
-                 9: 1,
-                 99: 0}
+num_locations = {1: 3, 2: 3, 3: 1, 4: 1, 5: 2, 6: 2, 7: 3, 8: 3, 9: 1, 99: 0}
 
 
 class IntCode(object):
-
     def __init__(self, program, input_value=None):
         self.prog = program
         self.index = 0
@@ -30,12 +20,20 @@ class IntCode(object):
         locs = []
         for i in range(num_locations[op % 100]):
             mode = (op // (10 ** (2 + i))) % 10
-            vals.append(self.prog[self.index] if mode == 1 else
-                        self.prog[self.prog[self.index] + self.rel_pos] if mode == 2 else
-                        self.prog[self.prog[self.index]])
-            locs.append(None if mode == 1 else
-                        self.prog[self.index] + self.rel_pos if mode == 2 else
-                        self.prog[self.index])
+            vals.append(
+                self.prog[self.index]
+                if mode == 1
+                else self.prog[self.prog[self.index] + self.rel_pos]
+                if mode == 2
+                else self.prog[self.prog[self.index]]
+            )
+            locs.append(
+                None
+                if mode == 1
+                else self.prog[self.index] + self.rel_pos
+                if mode == 2
+                else self.prog[self.index]
+            )
             self.index += 1
         return op % 100, vals, locs
 
@@ -79,14 +77,17 @@ class IntCode(object):
                 self.rel_pos += vals[0]
             else:
                 raise Exception(
-                    "Weird value at pos {}: {} ".format(self.index, self.prog[self.index]))
+                    "Weird value at pos {}: {} ".format(
+                        self.index, self.prog[self.index]
+                    )
+                )
 
             if self.index < 0:
                 raise ValueError("Index negative")
 
 
 def read_input():
-    foo = [int(i) for i in open('input').read().strip().split(',')]
+    foo = [int(i) for i in open("input").read().strip().split(",")]
     program = collections.defaultdict(int)
     for i in range(len(foo)):
         program[i] = foo[i]
@@ -107,7 +108,7 @@ class ArcadeMachine(object):
                 else:
                     self.output.append(next(self.intcode()))
         except StopIteration:
-            print('halted')
+            print("halted")
 
         for i in range(0, len(self.output), 3):
             self.screen[self.output[i]][self.output[i + 1]] = self.output[i + 2]
@@ -124,7 +125,7 @@ def main():
     screen = game()
 
     unique, counts = np.unique(screen, return_counts=True)
-    print('Blocks on screen:', dict(zip(unique, counts))[2])
+    print("Blocks on screen:", dict(zip(unique, counts))[2])
 
     # Part 2
     # Play for free
@@ -139,12 +140,10 @@ def main():
         plt.imshow(np.rot90(screen, k=-1))
         plt.show()
     except StopIteration:
-        print('halted')
+        print("halted")
     # for i in range(0, len(output), 3):
     #     screen[output[i]][output[i + 1]] = output[i + 2]
 
 
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

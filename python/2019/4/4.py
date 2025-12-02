@@ -1,6 +1,7 @@
 """
 No input file this time, just a range
 """
+
 input_start = 146810
 input_stop = 612564
 
@@ -11,8 +12,18 @@ for i in range(input_start, input_stop):
     double = False
     asc = True
     # Count occurrences of each digit
-    count = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0,
-             '9': 0, '0': 0}
+    count = {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "0": 0,
+    }
     for f in number:
         count[f] += 1
     # Make sure digits are ascending

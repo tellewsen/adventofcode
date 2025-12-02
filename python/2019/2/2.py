@@ -4,9 +4,9 @@ foo = []
 
 def read_file():
     output = []
-    with open('input', 'r') as f:
+    with open("input", "r") as f:
         for line in f.readlines():
-            input = line.split(',')
+            input = line.split(",")
     for l in input:
         output.append(int(l))
     return output
@@ -27,8 +27,7 @@ def intcode(ins):
             elif ins[index] == 99:
                 return
             else:
-                raise Exception(
-                    "Weird value at pos {}: {} ".format(index, ins[index]))
+                raise Exception("Weird value at pos {}: {} ".format(index, ins[index]))
         except IndexError:
             continue
         except Exception as e:

@@ -18,14 +18,14 @@ of the cables for each intersection point, and pick the minimal one.
 """
 
 # Read data from file
-line1, line2, _ = open('input').read().split('\n')
-line1, line2 = [i.split(',') for i in (line1, line2)]
+line1, line2, _ = open("input").read().split("\n")
+line1, line2 = [i.split(",") for i in (line1, line2)]
 
 
 # Make the paths
 def get_coords(line):
-    xmoves = {'R': 1, 'L': -1, 'U': 0, 'D': 0}
-    ymoves = {'R': 0, 'L': 0, 'U': 1, 'D': -1}
+    xmoves = {"R": 1, "L": -1, "U": 0, "D": 0}
+    ymoves = {"R": 0, "L": 0, "U": 1, "D": -1}
 
     x = 0
     y = 0

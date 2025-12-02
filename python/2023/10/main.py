@@ -3,7 +3,6 @@ p1: Start at S. Walk the entire loop recording the number of steps. The
 solution is at the halfway point.
 """
 
-
 from math import ceil
 import numpy as np
 import pytest
@@ -94,13 +93,12 @@ def p1(txt: list[str]) -> int:
 def p2(txt):
     boundary = get_boundary(txt)
     area = 0
-    for y,row in enumerate(txt):
+    for y, row in enumerate(txt):
         wall_count = 0
-        for x,char in enumerate(row):
-            if (x,y) in boundary:
-                
-            
-        
+        for x, char in enumerate(row):
+            if (x, y) in boundary:
+                ...
+
     return
 
 

@@ -1,7 +1,7 @@
-with open('input') as f:
-    file = f.read().rstrip().split('\n\n')
+with open("input") as f:
+    file = f.read().rstrip().split("\n\n")
 
-groups = [[set(b) for b in a.split('\n')] for a in file]
+groups = [[set(b) for b in a.split("\n")] for a in file]
 
 
 def counting_func(groups, set_op):

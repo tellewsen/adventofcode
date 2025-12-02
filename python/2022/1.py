@@ -4,11 +4,11 @@ with open("input") as f:
 elves = []
 sums = 0
 for i in cals:
-    if i == '':
+    if i == "":
         elves.append(sums)
         sums = 0
         continue
     sums += int(i)
 
-print(max(elves)) # 1 
-print(sum(sorted(elves)[-3:])) # 2
+print(max(elves))  # 1
+print(sum(sorted(elves)[-3:]))  # 2
