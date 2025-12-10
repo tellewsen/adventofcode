@@ -6,15 +6,6 @@ def solver(myinput: str):
 
 
 def p1(myinput: str):
-    #     myinput = """7,1
-    # 11,1
-    # 11,7
-    # 9,7
-    # 9,5
-    # 2,5
-    # 2,3
-    # 7,3
-    # """
     coords = []
     for i in myinput.splitlines():
         a, b = i.split(",")
@@ -32,14 +23,20 @@ def p1(myinput: str):
     return max_area
 
 
-# 4755140397 low
-
-
 def p2(myinput: str):
-    coords = []
-    for i in myinput.splitlines():
-        a, b = i.split(",")
-        coords.append(Pt(x=int(a), y=int(b)))
+    """TODO: This does not work.
+
+    I tried a bunch of stuff from other people and it worked at some point
+    but then I changed something and it broke and now I can't figure out
+    what. I think computing the sizes beforehand, sorting them and the edges
+    and then working through in descending order did the trick.
+
+    For the record I hate this problem.
+    """
+    coords = [
+        Pt(x=int(a), y=int(b))
+        for a, b in (line.split(",") for line in myinput.splitlines())
+    ]
     boundary_set = set(coords)
     edges = []
     for i in range(len(coords) - 1):
@@ -50,8 +47,6 @@ def p2(myinput: str):
         name="Remember to plot it to see what it looks like",
         edges=tuple(edges),
     )
-
-    best_coords = None
     max_area = 0
     for i in range(len(coords)):
         for j in range(i + 1, len(coords)):
@@ -74,8 +69,4 @@ def p2(myinput: str):
                 # print(x1, y1, x2, y2, area)
                 if area > max_area:
                     max_area = area
-                    best_coords = coords[i], coords[j]
-    # high: 4_566_760_900
-    # high: 4_664_572_758
-    print(best_coords)
     return max_area
