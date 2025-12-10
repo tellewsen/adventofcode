@@ -42,6 +42,10 @@ def _odd(x):
     return x % 2 == 1
 
 
+from functools import cache
+
+
+@cache
 def ispointinside(p: Pt, poly: Poly):
     return _odd(sum(rayintersectseg(p, edge) for edge in poly.edges))
 
