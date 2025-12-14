@@ -27,8 +27,14 @@ if __name__ == "__main__":
         year=year,
         day=day,
     )
-    answers = mod.solver(myinput)
     if args.p:
         print(f"Input: {myinput}")
-    print(f"Part1: {answers[0]}")
-    print(f"Part2: {answers[1]}")
+    answers = mod.solver(myinput)
+    try:
+        # Old style that didn't print solutions underway
+        if answers is not None:
+            print(f"Part1: {answers[0]}")
+            print(f"Part2: {answers[1]}")
+    except Exception:
+        # New style that does its own printing
+        pass
