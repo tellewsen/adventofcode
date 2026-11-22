@@ -116,3 +116,8 @@ input
 */input.txt
 *.txt
 .env
+
+# Advent of Code puzzle inputs: the creator asks that these not be shared
+input
+input.txt
+ex.txt
